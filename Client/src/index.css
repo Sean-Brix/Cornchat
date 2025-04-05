@@ -1,0 +1,4 @@
+@import "tailwindcss";
+body {
+  @apply bg-gradient-to-t from-stone-200 to-yellow-100 h-full bg-no-repeat;
+}

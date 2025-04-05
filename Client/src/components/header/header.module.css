@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+.Header {
+  @apply flex items-center justify-between row-start-1 h-full col-span-4 p-5 bg-[#e4d895] rounded-b-xs md:hidden shadow-md;
+
+  h1 {
+    @apply text-3xl font-extrabold after:content-["CHAT"] after:text-amber-300;
+  }
+}
+.menuIcon {
+  @apply relative size-7;
+}
+.profile {
+  @apply rounded-full size-8;
+}

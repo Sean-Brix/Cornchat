@@ -1,0 +1,5 @@
+@import "tailwindcss";
+
+.body {
+  @apply grid grid-rows-[70px_1fr] gap-y-5 overflow-hidden h-svh w-lvw md:grid-rows-2 md:grid-cols-[200px_1fr] lg:grid-cols-[200px_1fr_200px];
+}

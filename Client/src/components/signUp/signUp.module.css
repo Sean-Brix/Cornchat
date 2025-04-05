@@ -1,0 +1,33 @@
+@import "tailwindcss";
+
+.body {
+  @apply flex flex-col items-center justify-center h-screen gap-10  p-5;
+}
+
+.titleContainer {
+  @apply text-center font-extrabold;
+  .Title {
+    @apply text-6xl after:content-["CHAT"] after:text-amber-300;
+  }
+  h6 {
+    @apply text-xl opacity-30 leading-10;
+  }
+}
+
+.signUpContainer {
+  @apply flex flex-col items-center gap-5 rounded-sm;
+  input {
+    @apply focus:outline-0 leading-2 w-xs p-3 border-1 rounded-sm sm:w-md;
+  }
+  button {
+    @apply border-1 leading-2 p-4 w-xs rounded-sm font-semibold hover:bg-amber-100 cursor-pointer  sm:w-md;
+  }
+}
+
+.wrapper {
+  @apply flex flex-col gap-5 sm:flex-row sm:w-md;
+
+  button {
+    @apply sm:w-44;
+  }
+}

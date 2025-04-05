@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+.sideNav {
+  @apply z-10 flex top-18 left-0 flex-col gap-5 p-5 h-100 bg-[#e4d895] border-[#adadad] border-r-1  md:h-dvh md:top-0;
+}
+
+.Title {
+  @apply hidden md:block text-2xl font-extrabold after:content-["CHAT"] after:text-amber-300;
+}
+.signOut {
+  @apply mt-auto p-2 w-full  bg-[#fffff7] border-1 border-[#dbdbdb] rounded-2xl cursor-pointer text-[#464645] hover:bg-[#f6ffa8] font-semibold;
+}
+.navLink {
+  @apply flex items-center w-full p-1 gap-2 text-nowrap text-sm font-semibold cursor-pointer hover:bg-amber-300 transition-all duration-500 rounded-full;
+}
+
+.linkImg {
+  @apply h-10 w-10 rounded-full;
+}
+
+.friendsTab {
+  @apply flex items-center w-full p-1 gap-2 text-nowrap text-sm font-semibold cursor-pointer hover:bg-amber-300 transition-all duration-500 rounded-full;
+}

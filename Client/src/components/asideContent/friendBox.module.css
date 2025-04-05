@@ -1,0 +1,29 @@
+@import "tailwindcss";
+
+.asideContainer {
+  @apply relative col-start-3 h-lvh hidden md:hidden lg:block p-3 bg-[#e4d895];
+}
+
+.friends {
+  @apply flex flex-row gap-2 items-center;
+  & img {
+    @apply size-10 rounded-full;
+  }
+}
+.status {
+  @apply border-b-1 border-[#99999983] text-green-500 font-bold text-2xl mb-5;
+}
+.friendName {
+  @apply font-semibold text-xs place-items-end;
+}
+
+.searchContainer {
+  @apply absolute bottom-0 flex items-center justify-around gap-1 mt-auto;
+
+  & input {
+    @apply p-2 w-1/1 h-10  bg-[#91917c60] border-1 border-[#dbdbdb] rounded-2xl focus:outline-0;
+  }
+  img {
+    @apply p-2 size-15 rounded-full cursor-pointer;
+  }
+}
