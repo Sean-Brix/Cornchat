@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
-import addStatics from './statics_accounts.js'
-import addMethods from './methods_accounts.js'
+import {addStatics} from './statics_accounts.js'
+import {addMethods} from './methods_accounts.js'
 import schema from './schema_accounts.js'
 
 addStatics(schema);

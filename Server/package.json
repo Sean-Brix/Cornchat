@@ -13,6 +13,7 @@
   "license": "ISC",
   "type": "module",
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "colors": "^1.4.0",
     "connect-mongo": "^5.1.0",
     "cookie-parse": "^0.4.0",

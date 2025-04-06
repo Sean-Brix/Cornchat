@@ -14,7 +14,7 @@ dotenv.config();
 colors.enable();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3000;
 const SECRETE = process.env.SECRET;
 
 // Server
@@ -28,15 +28,14 @@ server.listen(PORT, () => {
 mongoose.connect(process.env.MONGO_URI || "mongodb://localhost:27017/Cornchat");
 
 // Middleware
-server.use(cookieParser);
+server.use(cookieParser());
 server.use(express.urlencoded({ extended: true }));
+server.use(express.json());
 
 server.use(cors({
-  origin: '*',
+  origin: process.env.FRONTEND_URL || "http://localhost:5173/",
   methods: ['POST', 'GET']
 }))
-
-server.use(cookieParser());
 
 server.use(session({
   saveUninitialized: false,
@@ -49,10 +48,12 @@ server.use(session({
   },
   store: dbStore.create({
     mongoUrl: process.env.MONGO_URI || "mongodb://localhost:27017/Cornchat",
-    collectionName: process.env.MONGO_SESSION || "session",
+    collectionName: process.env.MONGO_SESSION || "sessions",
     ttl: 60 * 60 * 24,
-    autoRemove: 'native'
+    autoRemove: 'native',
   })
 }))
 
-
+// Route
+import route from './Route/route.js'
+server.use('/', route);

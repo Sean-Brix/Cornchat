@@ -1,9 +1,26 @@
 import styles from "./sideNav.module.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Apps } from "../../pages/cornChat/cornChat";
 import { useContext } from "react";
 function sideNav() {
   const { show, setShow } = useContext(Apps);
+
+  const navigate = useNavigate();
+
+  const logout = async (event)=>{
+    event.preventDefault();
+
+    const response = await fetch('http://localhost:3000/user/logout');
+
+    const data = await response.json();
+    if(!response.ok){
+      alert(data.message);
+      return;
+    }
+
+    navigate('/');
+  }
+
   return (
     <nav
       className={` transition-transform duration-500 ${
@@ -51,9 +68,9 @@ function sideNav() {
         <h1>FRIENDS</h1>
       </div>
 
-      <Link to="/" className="mt-auto">
-        <button className={styles.signOut}>Sign Out</button>
-      </Link>
+
+      <button className={styles.signOut} onClick={logout} >Sign Out</button>
+
     </nav>
   );
 }

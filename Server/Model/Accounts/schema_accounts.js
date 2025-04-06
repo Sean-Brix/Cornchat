@@ -8,7 +8,13 @@ const schema = mongoose.Schema({
     password: {
         type: String,
         require: true
+    },
+    fullname: {
+        type: String,
+        require: true
     }
+
+    
 });
 
 export default schema;
