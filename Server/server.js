@@ -8,6 +8,9 @@ import cookieParser from "cookie-parser"
 import session from "express-session"
 import dbStore from 'connect-mongo'
 import mongoose from "mongoose"
+import { Server } from 'socket.io'
+import http from 'http'
+import { connect_socket } from './socket.js'
 
 // Configuration
 dotenv.config();
@@ -18,7 +21,16 @@ const PORT = process.env.PORT || 3000;
 const SECRETE = process.env.SECRET;
 
 // Server
-const server = express();
+const app = express();
+const server = http.createServer(app);
+const socket = new Server(server, {
+  cors: {
+    origin: "*", 
+    methods:['POST', 'GET']
+  }
+});
+
+connect_socket(socket);
 
 server.listen(PORT, () => {
   console.log("\n\nLink: ".magenta + ("127.0.0.1:" + PORT + "/").yellow.underline + "\n\n\n");
@@ -28,16 +40,16 @@ server.listen(PORT, () => {
 mongoose.connect(process.env.MONGO_URI || "mongodb://localhost:27017/Cornchat");
 
 // Middleware
-server.use(cookieParser());
-server.use(express.urlencoded({ extended: true }));
-server.use(express.json());
+app.use(cookieParser());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
-server.use(cors({
-  origin: process.env.FRONTEND_URL || "http://localhost:5173/",
+app.use(cors({
+  origin: "*" || process.env.FRONTEND_URL,
   methods: ['POST', 'GET']
 }))
 
-server.use(session({
+app.use(session({
   saveUninitialized: false,
   resave: false,
   secret: SECRETE || "alternative secrete",
@@ -56,4 +68,4 @@ server.use(session({
 
 // Route
 import route from './Route/route.js'
-server.use('/', route);
+app.use('/', route);
