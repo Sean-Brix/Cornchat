@@ -23,7 +23,7 @@ function sideNav() {
 
   return (
     <nav
-      className={` transition-transform duration-500 ${
+      className={` transition-transform duration-1000 ${
         !show
           ? "translate-0 absolute"
           : "translate-x-[-20rem] absolute md:translate-0"
