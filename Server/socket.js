@@ -1,5 +1,14 @@
+import { Server } from 'socket.io'
 
-export function connect_socket(socket){
+export function connect_socket(server){
+
+    // Create socket server
+    const socket = new Server(server, {
+      cors: {
+        origin: "*", 
+        methods:['POST', 'GET']
+      }
+    });
 
     // When a client connects to a socket this function runs, parameter (io) receives that specific socket's data
     socket.on('connection', (io)=>{

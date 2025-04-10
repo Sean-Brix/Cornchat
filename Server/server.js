@@ -1,4 +1,6 @@
+import http from 'http'
 import express from "express"
+import { connect_socket } from './socket.js'
 import path from "path"
 import { fileURLToPath } from "url"
 import colors from "colors"
@@ -8,9 +10,6 @@ import cookieParser from "cookie-parser"
 import session from "express-session"
 import dbStore from 'connect-mongo'
 import mongoose from "mongoose"
-import { Server } from 'socket.io'
-import http from 'http'
-import { connect_socket } from './socket.js'
 
 // Configuration
 dotenv.config();
@@ -23,14 +22,9 @@ const SECRETE = process.env.SECRET;
 // Server
 const app = express();
 const server = http.createServer(app);
-const socket = new Server(server, {
-  cors: {
-    origin: "*", 
-    methods:['POST', 'GET']
-  }
-});
 
-connect_socket(socket);
+// Open socket
+connect_socket(server);
 
 server.listen(PORT, () => {
   console.log("\n\nLink: ".magenta + ("127.0.0.1:" + PORT + "/").yellow.underline + "\n\n\n");
