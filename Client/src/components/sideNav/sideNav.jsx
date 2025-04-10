@@ -7,29 +7,29 @@ function sideNav() {
 
   const navigate = useNavigate();
 
-  const logout = async (event)=>{
+  const logout = async (event) => {
     event.preventDefault();
 
-    const response = await fetch('http://localhost:3000/user/logout');
+    const response = await fetch("http://localhost:3000/user/logout");
 
     const data = await response.json();
-    if(!response.ok){
+    if (!response.ok) {
       alert(data.message);
       return;
     }
 
-    navigate('/');
-  }
+    navigate("/");
+  };
 
   return (
     <nav
-      className={` transition-transform duration-500 ${
+      className={` transition-transform duration-1000 ${
         !show
           ? "translate-0 absolute"
           : "translate-x-[-20rem] absolute md:translate-0"
       } ${styles.sideNav}`}
     >
-      <h1 className={styles.Title}>CORN </h1>
+      <h1 className={styles.Title}>TORN </h1>
       <Link to="/cornChat">
         <div className={styles.navLink}>
           <img
@@ -68,9 +68,9 @@ function sideNav() {
         <h1>FRIENDS</h1>
       </div>
 
-
-      <button className={styles.signOut} onClick={logout} >Sign Out</button>
-
+      <button className={styles.signOut} onClick={logout}>
+        Sign Out
+      </button>
     </nav>
   );
 }
