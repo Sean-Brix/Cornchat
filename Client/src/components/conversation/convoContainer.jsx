@@ -6,6 +6,7 @@ function convo() {
 
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
+  const [username, setUsername] = useState(() => `User_${Math.floor(Math.random() * 1000)}`)
 
   useEffect(()=>{
 
@@ -21,11 +22,12 @@ function convo() {
 
     // Render all new messages
     socket.on('message-receive', (new_message)=>{
-      setMessages((prev)=> [...prev, new_message])
+      setMessages(prev => [...prev, new_message])
     })
 
     return ()=>{
       socket.off('all-message');
+      socket.off('message-receive');
     }
   }, [])
 
@@ -34,7 +36,7 @@ function convo() {
 
     socket.emit("message-send", {
       message: input,
-      type: 'current'
+      sender: username
     })
  
   }
@@ -54,17 +56,20 @@ function convo() {
         {
           messages.map((data, index)=>(
 
-            <div className={data.type === 'current'? styles.currentUser : styles.otherUser} key ={index}>
+            <div className={data.sender === username? styles.currentUser : styles.otherUser} key ={index}>
 
               <p>
                 {data.message}
               </p>
 
-
-              <img
-                src="https://img.freepik.com/free-vector/illustration-businessman_53876-5856.jpg?ga=GA1.1.1391464815.1739253387&semt=ais_hybrid"
-                alt=""
-              />
+              {
+                data.sender !== username
+                &&
+                <img
+                  src="https://img.freepik.com/free-vector/illustration-businessman_53876-5856.jpg?ga=GA1.1.1391464815.1739253387&semt=ais_hybrid"
+                  alt=""
+                />
+              }
             </div>
 
           ))

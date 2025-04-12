@@ -9,13 +9,14 @@ export function connect_socket(server) {
     },
   });
 
+
   io.on('connection', (socket) => {
 
     socket.emit('all-message', []);
 
     socket.on('message-send', (msg) => {
 
-      socket.broadcast.emit('message-receive', msg);
+      io.emit('message-receive', msg);
 
     });
 
