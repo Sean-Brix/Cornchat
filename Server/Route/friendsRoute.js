@@ -1,18 +1,21 @@
 import express from 'express'
 import path from 'path'
 import { fileURLToPath } from 'url';
+import { getFriendList } from '../Controller/friends/friends_ctrl.js';
 
+// Configure
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-
-// Routers
+// Route
 const Route = express.Router();
 
-import user from './userRoute.js'
-Route.use('/user', user);
+// CRUD Friends
+Route.route('/')
+    .get(getFriendList)
+    .post((req, res)=>{
+        
+    })
 
-import friends from './friendsRoute.js'
-Route.use('/friends', friends)
 
 export default Route;
